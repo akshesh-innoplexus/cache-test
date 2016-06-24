@@ -9,11 +9,11 @@ client.on('connect', function() {
 });
 
 var cache = require('express-redis-cache')({client: client, expire: 10});
+var Article = require('../models/articles');
 
-/* GET home page. */
-router.get('/',
+router.get('/data-redis',
   function(req, res, next) {
-    console.log('Fetching from database...');
+    console.log('Fetching from redis database...');
     console.time('Fetching from database took');
     next();
   },
@@ -26,6 +26,24 @@ router.get('/',
       console.timeEnd('Fetching from database took');
       res.json({'data': val});
     })
+  }
+);
+
+router.get('/data-mongo',
+  function(req, res, next) {
+    console.log('Fetching from mongoose database...');
+    console.time('Fetching from database took');
+    next();
+  },
+  function(req, res) {
+    // client.keys('*', function(err, reply){
+    //   // console.log(reply);
+    //   res.json({'data':reply});
+    // });
+    Article.findOne({}, function(err, obj){
+      console.timeEnd('Fetching from database took');
+      res.json({'data': obj.txt});
+    });
   }
 );
 

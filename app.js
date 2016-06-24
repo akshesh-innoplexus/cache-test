@@ -11,21 +11,8 @@ var users = require('./routes/users');
 var app = express();
 var cache = require('express-redis-cache')();
 
-// Connect to redis db
-var redis = require('redis');
-var client = redis.createClient();
-client.on('connect', function() {
-    console.log('Connected to redis database!');
-});
+// Long text for the test
 
-// Set up dummy data
-client.set('JavaScript', 'NodeJS');
-client.set('JavaScript', 'AngularJS');
-client.set('Python', 'Django');
-client.set('Python_other', 'Flask');
-client.set('Ruby', 'Rails');
-client.set('PHP', 'Yii');
-client.set('PHP_other', 'CakePHP');
 txt = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed erat aliquet rhoncus. Morbi iaculis malesuada purus sit amet sodales. Aenean magna massa, aliquet nec metus id, mollis efficitur justo. Aenean volutpat arcu risus, at viverra mi viverra porttitor. Fusce ut mi quam. Vivamus malesuada justo vel sem porttitor rutrum. Aenean aliquam blandit dui, eget convallis diam pretium sit amet. Mauris gravida justo vel volutpat imperdiet. Praesent tincidunt tempor leo id congue. Donec iaculis metus eu erat sollicitudin blandit. Quisque tempor urna eget ante pretium, in placerat lorem scelerisque. Ut egestas nisl magna, non aliquam justo rhoncus eget. Etiam viverra efficitur lacus eu dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at lectus maximus, consectetur felis sed, venenatis nunc. ';
 txt += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed erat aliquet rhoncus. Morbi iaculis malesuada purus sit amet sodales. Aenean magna massa, aliquet nec metus id, mollis efficitur justo. Aenean volutpat arcu risus, at viverra mi viverra porttitor. Fusce ut mi quam. Vivamus malesuada justo vel sem porttitor rutrum. Aenean aliquam blandit dui, eget convallis diam pretium sit amet. Mauris gravida justo vel volutpat imperdiet. Praesent tincidunt tempor leo id congue. Donec iaculis metus eu erat sollicitudin blandit. Quisque tempor urna eget ante pretium, in placerat lorem scelerisque. Ut egestas nisl magna, non aliquam justo rhoncus eget. Etiam viverra efficitur lacus eu dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at lectus maximus, consectetur felis sed, venenatis nunc. ';
 txt += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed erat aliquet rhoncus. Morbi iaculis malesuada purus sit amet sodales. Aenean magna massa, aliquet nec metus id, mollis efficitur justo. Aenean volutpat arcu risus, at viverra mi viverra porttitor. Fusce ut mi quam. Vivamus malesuada justo vel sem porttitor rutrum. Aenean aliquam blandit dui, eget convallis diam pretium sit amet. Mauris gravida justo vel volutpat imperdiet. Praesent tincidunt tempor leo id congue. Donec iaculis metus eu erat sollicitudin blandit. Quisque tempor urna eget ante pretium, in placerat lorem scelerisque. Ut egestas nisl magna, non aliquam justo rhoncus eget. Etiam viverra efficitur lacus eu dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at lectus maximus, consectetur felis sed, venenatis nunc. ';
@@ -741,8 +728,55 @@ txt += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed
 txt += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed erat aliquet rhoncus. Morbi iaculis malesuada purus sit amet sodales. Aenean magna massa, aliquet nec metus id, mollis efficitur justo. Aenean volutpat arcu risus, at viverra mi viverra porttitor. Fusce ut mi quam. Vivamus malesuada justo vel sem porttitor rutrum. Aenean aliquam blandit dui, eget convallis diam pretium sit amet. Mauris gravida justo vel volutpat imperdiet. Praesent tincidunt tempor leo id congue. Donec iaculis metus eu erat sollicitudin blandit. Quisque tempor urna eget ante pretium, in placerat lorem scelerisque. Ut egestas nisl magna, non aliquam justo rhoncus eget. Etiam viverra efficitur lacus eu dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at lectus maximus, consectetur felis sed, venenatis nunc. ';
 txt += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed erat aliquet rhoncus. Morbi iaculis malesuada purus sit amet sodales. Aenean magna massa, aliquet nec metus id, mollis efficitur justo. Aenean volutpat arcu risus, at viverra mi viverra porttitor. Fusce ut mi quam. Vivamus malesuada justo vel sem porttitor rutrum. Aenean aliquam blandit dui, eget convallis diam pretium sit amet. Mauris gravida justo vel volutpat imperdiet. Praesent tincidunt tempor leo id congue. Donec iaculis metus eu erat sollicitudin blandit. Quisque tempor urna eget ante pretium, in placerat lorem scelerisque. Ut egestas nisl magna, non aliquam justo rhoncus eget. Etiam viverra efficitur lacus eu dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at lectus maximus, consectetur felis sed, venenatis nunc. ';
 txt += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu ex sed erat aliquet rhoncus. Morbi iaculis malesuada purus sit amet sodales. Aenean magna massa, aliquet nec metus id, mollis efficitur justo. Aenean volutpat arcu risus, at viverra mi viverra porttitor. Fusce ut mi quam. Vivamus malesuada justo vel sem porttitor rutrum. Aenean aliquam blandit dui, eget convallis diam pretium sit amet. Mauris gravida justo vel volutpat imperdiet. Praesent tincidunt tempor leo id congue. Donec iaculis metus eu erat sollicitudin blandit. Quisque tempor urna eget ante pretium, in placerat lorem scelerisque. Ut egestas nisl magna, non aliquam justo rhoncus eget. Etiam viverra efficitur lacus eu dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed at lectus maximus, consectetur felis sed, venenatis nunc. ';
-client.set('long_text', txt);
 
+
+// Connect to mongoose db
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/cache-test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log('Connected to mongoose database!');
+});
+var Article = require('./models/articles');
+setup_mongoose_dummy_data();
+
+// Connect to redis db
+var redis = require('redis');
+var client = redis.createClient();
+client.on('connect', function() {
+    console.log('Connected to redis database!');
+});
+setup_redis_dummy_data();
+
+// Set up dummy data
+
+function setup_mongoose_dummy_data(){
+
+  Article.findOne({name: 'Lorem ipsum'}, function(err, obj){
+    if(!obj){
+      var article = new Article({
+        name: 'Lorem ipsum',
+        txt: txt
+      });
+      // save the article and check for errors
+      article.save(function(err) {
+        if (err) console.log('Error creating Lorem ipsum article in Mongo!');
+      });
+    }
+  });
+}
+
+function setup_redis_dummy_data(){
+  client.set('JavaScript', 'NodeJS');
+  client.set('JavaScript', 'AngularJS');
+  client.set('Python', 'Django');
+  client.set('Python_other', 'Flask');
+  client.set('Ruby', 'Rails');
+  client.set('PHP', 'Yii');
+  client.set('PHP_other', 'CakePHP');
+  client.set('long_text', txt);
+}
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
@@ -788,7 +822,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+ 
 var port = 3000;
 app.listen(port);
 console.log("Server listening on http://localhost:" + port);
